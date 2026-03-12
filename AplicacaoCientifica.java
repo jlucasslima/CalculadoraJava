@@ -6,8 +6,17 @@ João Lucas de Lima Souza - RA:00360044
 Pedro Chagas Neves de Farias Nascimento - RA:00359511    
    
 */
+
+/**
+ * Classe principal que gerencia a execucao da Calculadora Cientifica.
+ * Permite a entrada de dados tanto via argumentos de linha de comando quanto via interacao com o usuario.
+ */
 public class AplicacaoCientifica {
-    //Vetor de string para dados da linha de comando
+    
+    /**
+     * Metodo principal (ponto de entrada) da aplicacao.
+     * * @param args Vetor de strings para receber dados diretamente da linha de comando.
+     */
     public static void main(String args[]) {
         String operando1 = "", operador = "", operando2 = "0"; 
 
@@ -37,22 +46,38 @@ public class AplicacaoCientifica {
         }
     }
 
-    private static boolean isBasica(String op) {
+    /**
+     * Verifica se o operador fornecido corresponde a uma operacao matematica basica.
+     * * @param op String contendo o operador a ser verificado.
+     * @return true se for um operador basico (+, -, *, /, x), false caso contrario.
+     */
+    public static boolean isBasica(String op) {
         return op.equals("+") || op.equals("-") || op.equals("*") || op.equals("/") || op.toLowerCase().equals("x");
     }
 
-    private static boolean isCientifica(String op) {
+    /**
+     * Verifica se o operador fornecido corresponde a uma operacao matematica cientifica.
+     * * @param op String contendo o operador a ser verificado.
+     * @return true se for um operador cientifico (seno, fatorial, inverso), false caso contrario.
+     */
+    public static boolean isCientifica(String op) {
         String o = op.toLowerCase();
         return o.equals("seno") || o.equals("fatorial") || o.equals("inverso");
     }
 
+    /**
+     * Encaminha os operandos e o operador para a classe de calculo apropriada (Basica ou Cientifica).
+     * * @param s1 Primeiro operando em formato de String.
+     * @param op Operador matematico em formato de String.
+     * @param s2 Segundo operando em formato de String (pode ser "0" em operacoes unarias).
+     */
     public static void executar(String s1, String op, String s2) {
+        CalcCientifica calc = new CalcCientifica();
+
         if (isBasica(op)) {
-            CalculadoraBasica cb = new CalculadoraBasica();
-            cb.calcular(s1, op, s2);
+            calc.calcular(s1, op, s2);
         } else if (isCientifica(op)) {
-            CalcCientifica cc = new CalcCientifica();
-            cc.calcular(s1, op);
+            calc.calcular(s1, op);
         } else {
             System.out.println("Operador invalido!!");
             System.exit(0);

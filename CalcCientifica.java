@@ -6,8 +6,24 @@ João Lucas de Lima Souza - RA:00360044
 Pedro Chagas Neves de Farias Nascimento - RA:00359511    
    
 */
+
+/**
+ * Classe responsavel por realizar as operacoes matematicas cientificas.
+ * Suporta as operacoes de seno, fatorial e inverso.
+ */
 public class CalcCientifica {
+
+    public CalculadoraBasica calcBasica;
+
+    public CalcCientifica() {
+        this.calcBasica = new CalculadoraBasica();
+    }
     
+    /**
+     * Executa a operacao cientifica solicitada com base no operando e operador fornecidos.
+     * * @param operando1 O valor sobre o qual a operacao sera realizada, em formato de String.
+     * @param operador A operacao desejada ("seno", "fatorial" ou "inverso").
+     */
     public void calcular(String operando1, String operador) {
         
         if (isNumeric(operando1)) {
@@ -46,7 +62,16 @@ public class CalcCientifica {
         }
     }
 
-    private long calcularFatorial(int n) {
+    public void calcular(String operando1, String operador, String operando2) {
+        this.calcBasica.calcular(operando1, operador, operando2);
+    }
+
+    /**
+     * Calcula o fatorial de um numero inteiro positivo.
+     * * @param n Numero inteiro do qual se deseja calcular o fatorial.
+     * @return O valor do fatorial do numero fornecido.
+     */
+    public long calcularFatorial(int n) {
         long fat = 1;
         for (int i = 2; i <= n; i++) {
             fat *= i;
@@ -54,7 +79,12 @@ public class CalcCientifica {
         return fat;
     }
 
-    private boolean isNumeric(String str) {
+    /**
+     * Verifica se uma dada String representa um numero valido (inteiro ou decimal).
+     * * @param str A String a ser verificada.
+     * @return true se a String for um numero valido, false caso contrario.
+     */
+    public boolean isNumeric(String str) {
         if (str == null || str.length() == 0) return false;
 
         boolean foundDecimal = false;
